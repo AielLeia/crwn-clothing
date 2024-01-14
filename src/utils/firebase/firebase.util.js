@@ -1,14 +1,14 @@
 import {initializeApp} from 'firebase/app'
 import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
+  signInWithPopup,
+  signOut
 } from 'firebase/auth'
-import {getFirestore, doc, getDoc, setDoc, collection, writeBatch} from "firebase/firestore"
+import {collection, doc, getDoc, getDocs, getFirestore, query, setDoc, writeBatch} from "firebase/firestore"
 import {API_KEY, APP_ID, AUTH_DOMAIN, MESSAGING_SENDER_ID, PROJECT_ID, STORAGE_BUCKET} from "../env-loader/env.util.js";
 
 const firebaseConfig = {
@@ -41,6 +41,18 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 
   await batch.commit()
   console.log("DONE !")
+}
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories')
+  const q = query(collectionRef)
+
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs.reduce((acc, docSnapshot) => {
+    const {title, items} = docSnapshot.data()
+    acc[title.toLowerCase()] = items
+    return acc
+  }, {})
 }
 
 export const createUserDocumentFromAuth = async (userAuth, additionalInformation = {}) => {
