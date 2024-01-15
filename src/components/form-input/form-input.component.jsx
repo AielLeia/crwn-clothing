@@ -4,7 +4,7 @@ const FormInput = ({label, ...inputAttribute}) => {
   return (
     <FormGroup>
       <StyledFormInput {...inputAttribute}/>
-      {label && (<FormInputLabel className={`${inputAttribute.value.length ? 'shrink' : ''}`}>{label}</FormInputLabel>)}
+      {label && (<FormInputLabel shrink={inputAttribute.value.length}>{label}</FormInputLabel>)}
     </FormGroup>
   )
 }
