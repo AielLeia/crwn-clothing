@@ -11,5 +11,5 @@ export {
   PROJECT_ID,
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID,
-  APP_ID
-}
+  APP_ID,
+};

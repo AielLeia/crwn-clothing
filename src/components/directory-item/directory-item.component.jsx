@@ -1,25 +1,26 @@
 import {
   DirectoryItemBackgroundImage,
-  DirectoryItemBody, DirectoryItemBodyText,
+  DirectoryItemBody,
+  DirectoryItemBodyText,
   DirectoryItemBodyTitle,
-  DirectoryItemContainer
+  DirectoryItemContainer,
 } from "./directory-item.style.jsx";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const CategoryItem = ({category}) => {
-  const navigate = useNavigate()
+const CategoryItem = ({ category }) => {
+  const navigate = useNavigate();
 
-  const onNavigateHandler = () => navigate(category.route)
+  const onNavigateHandler = () => navigate(category.route);
 
   return (
     <DirectoryItemContainer onClick={onNavigateHandler}>
-      <DirectoryItemBackgroundImage $backgroundImage={category.imageUrl}/>
+      <DirectoryItemBackgroundImage $backgroundImage={category.imageUrl} />
       <DirectoryItemBody>
         <DirectoryItemBodyTitle>{category.title}</DirectoryItemBodyTitle>
         <DirectoryItemBodyText>Shop now</DirectoryItemBodyText>
       </DirectoryItemBody>
     </DirectoryItemContainer>
-  )
-}
+  );
+};
 
-export {CategoryItem}
+export { CategoryItem };
