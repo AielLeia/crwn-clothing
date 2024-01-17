@@ -1,4 +1,5 @@
 import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducer/reducer.util.js";
 
 const addCartItem = (cartItems, productToAdd) => {
   let existingCartItem = cartItems.find((item) => item.id === productToAdd.id);
@@ -45,9 +46,7 @@ export const CartContext = createContext({
 });
 
 export const CART_ACTION_TYPES = {
-  ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
-  REMOVE_ITEM_FROM_CART: "REMOVE_ITEM_FROM_CART",
-  CLEAR_ITEM_FROM_CART: "CLEAR_ITEM_FROM_CART",
+  SET_CART_ITEMS: "SET_CART_ITEMS",
   CART_TOGGLE: "CART_TOGGLE",
 };
 
@@ -63,57 +62,15 @@ const computeNewTotalPriceAndTotalItems = (newCartItems) => {
   );
   return { newTotalItems, newTotalPrice };
 };
-
-const computeAddItemToCart = (state, payload) => {
-  const newCartItems = addCartItem(state.cartItems, payload);
-  const { newTotalItems, newTotalPrice } =
-    computeNewTotalPriceAndTotalItems(newCartItems);
-
-  return {
-    ...state,
-    cartItems: newCartItems,
-    totalItems: newTotalItems,
-    totalPrice: newTotalPrice,
-  };
-};
-
-const computeRemoveItemFromCart = (state, payload) => {
-  const newCartItems = removeItemCart(state.cartItems, payload);
-  const { newTotalItems, newTotalPrice } =
-    computeNewTotalPriceAndTotalItems(newCartItems);
-
-  return {
-    ...state,
-    cartItems: newCartItems,
-    totalItems: newTotalItems,
-    totalPrice: newTotalPrice,
-  };
-};
-
-const computeClearItemFromCart = (state, payload) => {
-  const newCartItems = clearItemCart(state.cartItems, payload);
-
-  const { newTotalItems, newTotalPrice } =
-    computeNewTotalPriceAndTotalItems(newCartItems);
-
-  return {
-    ...state,
-    cartItems: newCartItems,
-    totalItems: newTotalItems,
-    totalPrice: newTotalPrice,
-  };
-};
-
 const cartReducer = (state, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case CART_ACTION_TYPES.ADD_ITEM_TO_CART:
-      return computeAddItemToCart(state, payload);
-    case CART_ACTION_TYPES.REMOVE_ITEM_FROM_CART:
-      return computeRemoveItemFromCart(state, payload);
-    case CART_ACTION_TYPES.CLEAR_ITEM_FROM_CART:
-      return computeClearItemFromCart(state, payload);
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
     case CART_ACTION_TYPES.CART_TOGGLE:
       return {
         ...state,
@@ -134,30 +91,38 @@ const INITIAL_STATE = {
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
 
+  const { totalItems, cartItems, isCartOpen, totalPrice } = state;
+
+  const updateCartItemsReducers = (newCartItems) => {
+    const { newTotalPrice, newTotalItems } =
+      computeNewTotalPriceAndTotalItems(newCartItems);
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+        cartItems: newCartItems,
+        totalItems: newTotalItems,
+        totalPrice: newTotalPrice,
+      }),
+    );
+  };
+
   const addItemToCart = (productToAdd) => {
-    dispatch({
-      type: CART_ACTION_TYPES.ADD_ITEM_TO_CART,
-      payload: productToAdd,
-    });
+    const newCartItems = addCartItem(cartItems, productToAdd);
+    updateCartItemsReducers(newCartItems);
   };
+
   const removeItemFromCart = (productToRemove) => {
-    dispatch({
-      type: CART_ACTION_TYPES.REMOVE_ITEM_FROM_CART,
-      payload: productToRemove,
-    });
+    const newCartItems = removeItemCart(cartItems, productToRemove);
+    updateCartItemsReducers(newCartItems);
   };
+
   const clearItemFromCart = (productIdToRemove) => {
-    dispatch({
-      type: CART_ACTION_TYPES.CLEAR_ITEM_FROM_CART,
-      payload: productIdToRemove,
-    });
+    const newCartItems = clearItemCart(cartItems, productIdToRemove);
+    updateCartItemsReducers(newCartItems);
   };
 
   const setIsCartOpen = () => {
-    dispatch({ type: CART_ACTION_TYPES.CART_TOGGLE });
+    dispatch(createAction(CART_ACTION_TYPES.CART_TOGGLE));
   };
-
-  const { totalItems, cartItems, isCartOpen, totalPrice } = state;
 
   const value = {
     totalItems,
