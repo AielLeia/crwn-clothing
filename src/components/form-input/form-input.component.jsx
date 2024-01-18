@@ -9,7 +9,7 @@ const FormInput = ({ label, ...inputAttribute }) => {
     <FormGroup>
       <StyledFormInput {...inputAttribute} />
       {label && (
-        <FormInputLabel shrink={inputAttribute.value.length}>
+        <FormInputLabel $shrink={inputAttribute.value.length}>
           {label}
         </FormInputLabel>
       )}

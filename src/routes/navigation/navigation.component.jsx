@@ -9,14 +9,15 @@ import CrwnLogo from "../../assets/crown.svg?react";
 
 import { Outlet } from "react-router-dom";
 import { useContext } from "react";
-import { UserContext } from "../../contexts/user.context.jsx";
 import { signOutUser } from "../../utils/firebase/firebase.util.js";
 import { CartIcon } from "../../components/cart-icon/cart-icon.component.jsx";
 import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown.component.jsx";
 import { CartContext } from "../../contexts/cart.context.jsx";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector.js";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   return (
