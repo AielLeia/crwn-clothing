@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { BaseButton } from "../button/button.styles.jsx";
+import { Button } from "../button/button.component.jsx";
 
 export const ProductCardImage = styled.img`
   width: 100%;
@@ -8,7 +8,7 @@ export const ProductCardImage = styled.img`
   margin-bottom: 5px;
 `;
 
-export const ProductCardButton = styled(BaseButton)`
+export const ProductCardButton = styled(Button)`
   width: 80%;
   opacity: 0.7;
   position: absolute;
