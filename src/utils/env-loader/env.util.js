@@ -4,6 +4,7 @@ const PROJECT_ID = import.meta.env.VITE_PROJECT_ID;
 const STORAGE_BUCKET = import.meta.env.VITE_STORAGE_BUCKET;
 const MESSAGING_SENDER_ID = import.meta.env.VITE_MESSAGING_SENDER_ID;
 const APP_ID = import.meta.env.VITE_APP_ID;
+const STRIPE_PUBLISHABLE_KEY = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
 
 export {
   API_KEY,
@@ -12,4 +13,5 @@ export {
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID,
   APP_ID,
+  STRIPE_PUBLISHABLE_KEY,
 };
