@@ -1,5 +1,6 @@
-import "./product-card.style.jsx";
-import { BUTTON_TYPE_CLASSES } from "../button/button.types.js";
+import { useDispatch, useSelector } from 'react-redux';
+
+import './product-card.style.jsx';
 import {
   ProductCardButton,
   ProductCardContainer,
@@ -7,10 +8,11 @@ import {
   ProductCardFooterName,
   ProductCardFooterPrice,
   ProductCardImage,
-} from "./product-card.style.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selector.js";
-import { addItemToCart } from "../../store/cart/cart.action.js";
+} from './product-card.style.jsx';
+
+import { addItemToCart } from '../../store/cart/cart.action.js';
+import { selectCartItems } from '../../store/cart/cart.selector.js';
+import { BUTTON_TYPE_CLASSES } from '../button/button.types.js';
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();

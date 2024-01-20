@@ -1,5 +1,6 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
+import styled from 'styled-components';
 
 export const NavigationContainer = styled.div`
   height: 70px;

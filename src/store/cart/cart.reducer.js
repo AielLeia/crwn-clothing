@@ -1,4 +1,4 @@
-import { CART_ACTION_TYPES } from "./cart.types.js";
+import { CART_ACTION_TYPES } from './cart.types.js';
 
 const CART_INITIAL_STATE = {
   isCartOpen: false,

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Button } from "../button/button.component.jsx";
+import { Button } from '../button/button.component.jsx';
+import styled from 'styled-components';
 
 export const ProductCardImage = styled.img`
   width: 100%;

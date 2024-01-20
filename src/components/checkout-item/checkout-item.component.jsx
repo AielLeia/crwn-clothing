@@ -1,3 +1,5 @@
+import { useDispatch, useSelector } from 'react-redux';
+
 import {
   CheckoutItemContainer,
   CheckoutItemImage,
@@ -8,14 +10,14 @@ import {
   CheckoutItemQuantityArrow,
   CheckoutItemQuantityValue,
   CheckoutItemRemoveButton,
-} from "./checkout-item.styles.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selector.js";
+} from './checkout-item.styles.jsx';
+
 import {
   addItemToCart,
   clearItemFromCart,
   removeItemFromCart,
-} from "../../store/cart/cart.action.js";
+} from '../../store/cart/cart.action.js';
+import { selectCartItems } from '../../store/cart/cart.selector.js';
 
 const CheckoutItem = ({ cartItem }) => {
   const dispatch = useDispatch();

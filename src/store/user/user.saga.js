@@ -1,5 +1,14 @@
-import { takeLatest, put, all, call } from "redux-saga/effects";
-import { USER_ACTION_TYPES } from "./user.types.js";
+import { all, call, put, takeLatest } from 'redux-saga/effects';
+
+import {
+  signInFailed,
+  signInSuccess,
+  signOutFailed,
+  signOutSuccess,
+  signUpFailed,
+} from './user.action.js';
+import { USER_ACTION_TYPES } from './user.types.js';
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -7,21 +16,14 @@ import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
   signOutUser,
-} from "../../utils/firebase/firebase.util.js";
-import {
-  signInFailed,
-  signInSuccess,
-  signOutFailed,
-  signOutSuccess,
-  signUpFailed,
-} from "./user.action.js";
+} from '../../utils/firebase/firebase.util.js';
 
 function* getSnapshotFromUserAuth(userAuth, additionalDetails = {}) {
   try {
     const userSnapshot = yield call(
       createUserDocumentFromAuth,
       userAuth,
-      additionalDetails,
+      additionalDetails
     );
     yield put(signInSuccess({ id: userSnapshot.id, ...userSnapshot.data() }));
   } catch (error) {
@@ -43,7 +45,7 @@ function* signInWithEmailAndPassword({ payload: { email, password } }) {
     const { user } = yield call(
       signInAuthUserWithEmailAndPassword,
       email,
-      password,
+      password
     );
 
     yield call(getSnapshotFromUserAuth, user);
@@ -59,7 +61,7 @@ function* signUpWithEmailAndPassword({
     const { user } = yield call(
       createAuthUserWithEmailAndPassword,
       email,
-      password,
+      password
     );
     yield call(getSnapshotFromUserAuth, user, { displayName });
   } catch (error) {
@@ -98,14 +100,14 @@ function* onGoogleSignInStart() {
 function* onEmailSignInStart() {
   yield takeLatest(
     USER_ACTION_TYPES.EMAIL_SIGN_IN_START,
-    signInWithEmailAndPassword,
+    signInWithEmailAndPassword
   );
 }
 
 function* onEmailSignUpStart() {
   yield takeLatest(
     USER_ACTION_TYPES.EMAIL_SIGN_UP_START,
-    signUpWithEmailAndPassword,
+    signUpWithEmailAndPassword
   );
 }
 

@@ -1,10 +1,12 @@
-import { CategoryPreview } from "../../components/category-preview/category-preview.component.jsx";
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux';
+
+import { CategoryPreview } from '../../components/category-preview/category-preview.component.jsx';
+import { Spinner } from '../../components/spinner/spinner.component.jsx';
+
 import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
-} from "../../store/categories/categories.selector.js";
-import { Spinner } from "../../components/spinner/spinner.component.jsx";
+} from '../../store/categories/categories.selector.js';
 
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);

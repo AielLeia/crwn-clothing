@@ -1,15 +1,17 @@
-import { CheckoutItem } from "../../components/checkout-item/checkout-item.component.jsx";
+import { useSelector } from 'react-redux';
+
+import { CheckoutItem } from '../../components/checkout-item/checkout-item.component.jsx';
 import {
   CheckoutContainer,
   CheckoutHeader,
   CheckoutHeaderBlock,
   CheckoutTotal,
-} from "./checkout.styles.jsx";
-import { useSelector } from "react-redux";
+} from './checkout.styles.jsx';
+
 import {
   selectCartItems,
   selectCartTotal,
-} from "../../store/cart/cart.selector.js";
+} from '../../store/cart/cart.selector.js';
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);

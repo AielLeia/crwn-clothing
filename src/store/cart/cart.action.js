@@ -1,5 +1,5 @@
-import { createAction } from "../../utils/reducer/reducer.util.js";
-import { CART_ACTION_TYPES } from "./cart.types.js";
+import { createAction } from '../../utils/reducer/reducer.util.js';
+import { CART_ACTION_TYPES } from './cart.types.js';
 
 export const setIsCartOpen = (boolean) =>
   createAction(CART_ACTION_TYPES.CART_TOGGLE, boolean);
@@ -26,7 +26,7 @@ const addCartItem = (cartItems, productToAdd) => {
     return cartItems.map((item) =>
       item.id === productToAdd.id
         ? { ...item, quantity: item.quantity + 1 }
-        : item,
+        : item
     );
   }
 
@@ -35,14 +35,14 @@ const addCartItem = (cartItems, productToAdd) => {
 
 const removeItemCart = (cartItems, productToRemove) => {
   const existingCartItem = cartItems.find(
-    (item) => item.id === productToRemove.id,
+    (item) => item.id === productToRemove.id
   );
 
   if (existingCartItem && existingCartItem.quantity > 1) {
     return cartItems.map((item) =>
       item.id === productToRemove.id
         ? { ...item, quantity: item.quantity - 1 }
-        : item,
+        : item
     );
   }
 

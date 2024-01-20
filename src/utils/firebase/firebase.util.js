@@ -1,13 +1,13 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from 'firebase/app';
 import {
+  GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
-  GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-} from "firebase/auth";
+} from 'firebase/auth';
 import {
   collection,
   doc,
@@ -17,7 +17,8 @@ import {
   query,
   setDoc,
   writeBatch,
-} from "firebase/firestore";
+} from 'firebase/firestore';
+
 import {
   API_KEY,
   APP_ID,
@@ -25,7 +26,7 @@ import {
   MESSAGING_SENDER_ID,
   PROJECT_ID,
   STORAGE_BUCKET,
-} from "../env-loader/env.util.js";
+} from '../env-loader/env.util.js';
 
 const firebaseConfig = {
   apiKey: API_KEY,
@@ -38,7 +39,7 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 const googleAuthProvider = new GoogleAuthProvider();
 googleAuthProvider.setCustomParameters({
-  prompt: "select_account",
+  prompt: 'select_account',
 });
 
 export const auth = getAuth();
@@ -49,7 +50,7 @@ export const db = getFirestore();
 
 export const addCollectionAndDocuments = async (
   collectionKey,
-  objectsToAdd,
+  objectsToAdd
 ) => {
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
@@ -60,11 +61,11 @@ export const addCollectionAndDocuments = async (
   });
 
   await batch.commit();
-  console.log("DONE !");
+  console.log('DONE !');
 };
 
 export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, "categories");
+  const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
@@ -73,11 +74,11 @@ export const getCategoriesAndDocuments = async () => {
 
 export const createUserDocumentFromAuth = async (
   userAuth,
-  additionalInformation = {},
+  additionalInformation = {}
 ) => {
   if (!userAuth) return;
 
-  const userDocRef = doc(db, "users", userAuth.uid);
+  const userDocRef = doc(db, 'users', userAuth.uid);
   const userSnapshot = await getDoc(userDocRef);
 
   if (!userSnapshot.exists()) {
@@ -114,7 +115,7 @@ export const getCurrentUser = () => {
         unsubscribe();
         resolve(userAuth);
       },
-      reject,
+      reject
     );
   });
 };
@@ -131,7 +132,7 @@ async function createUser(userAuth, userDocRef, additionalInformation) {
       ...additionalInformation,
     });
   } catch (error) {
-    console.log("error creating the user", error.message);
+    console.log('error creating the user', error.message);
   }
 }
 

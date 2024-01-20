@@ -1,19 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+
+import { CartDropdown } from '../../components/cart-dropdown/cart-dropdown.component.jsx';
+import { CartIcon } from '../../components/cart-icon/cart-icon.component.jsx';
 import {
   LogoContainer,
-  NavigationContainer,
   NavLink,
   NavLinks,
-} from "./navigation.styles.jsx";
+  NavigationContainer,
+} from './navigation.styles.jsx';
 
-import CrwnLogo from "../../assets/crown.svg?react";
+import { selectIsCartOpen } from '../../store/cart/cart.selector.js';
+import { signOutStart } from '../../store/user/user.action.js';
+import { selectCurrentUser } from '../../store/user/user.selector.js';
 
-import { Outlet } from "react-router-dom";
-import { CartIcon } from "../../components/cart-icon/cart-icon.component.jsx";
-import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown.component.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser } from "../../store/user/user.selector.js";
-import { selectIsCartOpen } from "../../store/cart/cart.selector.js";
-import { signOutStart } from "../../store/user/user.action.js";
+import CrwnLogo from '../../assets/crown.svg?react';
 
 const Navigation = () => {
   const dispatch = useDispatch();

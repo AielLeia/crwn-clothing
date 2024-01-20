@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const DirectoryItemBackgroundImage = styled.div`
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
-  background-image: url("${(props) => props.$backgroundImage}");
+  background-image: url('${(props) => props.$backgroundImage}');
 `;
 
 export const DirectoryItemBody = styled.div`

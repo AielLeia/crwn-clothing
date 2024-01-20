@@ -1,21 +1,23 @@
-import { useState } from "react";
-import { FormInput } from "../form-input/form-input.component.jsx";
-import { Button } from "../button/button.component.jsx";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { Button } from '../button/button.component.jsx';
+import { FormInput } from '../form-input/form-input.component.jsx';
 import {
   SignInButtonContainer,
   SignInContainer,
   SignInTitle,
-} from "./sign-in-form.style.jsx";
-import { BUTTON_TYPE_CLASSES } from "../button/button.types.js";
-import { useDispatch } from "react-redux";
+} from './sign-in-form.style.jsx';
+
 import {
   emailSignInStart,
   googleSignInStart,
-} from "../../store/user/user.action.js";
+} from '../../store/user/user.action.js';
+import { BUTTON_TYPE_CLASSES } from '../button/button.types.js';
 
 const defaultFormFields = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 const SignInForm = () => {
@@ -31,8 +33,8 @@ const SignInForm = () => {
       dispatch(emailSignInStart(email, password));
       resetFormFields();
     } catch (e) {
-      if (e.code === "auth/invalid-credential") {
-        alert("Invalid credential", e);
+      if (e.code === 'auth/invalid-credential') {
+        alert('Invalid credential', e);
       }
     }
   };

@@ -1,9 +1,10 @@
 import {
-  InvertedButton,
-  GoogleSignInButton,
   BaseButton,
-} from "./button.styles.jsx";
-import { BUTTON_TYPE_CLASSES } from "./button.types.js";
+  GoogleSignInButton,
+  InvertedButton,
+} from './button.styles.jsx';
+
+import { BUTTON_TYPE_CLASSES } from './button.types.js';
 
 const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) => {
   return {
