@@ -4,13 +4,13 @@ import { useEffect } from "react";
 
 import { CategoriesPreview } from "../categories-preview/categories-preview.component.jsx";
 import { Category } from "../category/category.component.jsx";
-import { fetchCategoriesAsync } from "../../store/categories/categories.action.js";
+import { fetchCategoriesStart } from "../../store/categories/categories.action.js";
 
 const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCategoriesAsync());
+    dispatch(fetchCategoriesStart());
   }, []);
 
   return (
