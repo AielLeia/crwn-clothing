@@ -8,16 +8,21 @@ import {
 import CrwnLogo from "../../assets/crown.svg?react";
 
 import { Outlet } from "react-router-dom";
-import { signOutUser } from "../../utils/firebase/firebase.util.js";
 import { CartIcon } from "../../components/cart-icon/cart-icon.component.jsx";
 import { CartDropdown } from "../../components/cart-dropdown/cart-dropdown.component.jsx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../../store/user/user.selector.js";
 import { selectIsCartOpen } from "../../store/cart/cart.selector.js";
+import { signOutStart } from "../../store/user/user.action.js";
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
+
+  const signOutHandler = () => {
+    dispatch(signOutStart());
+  };
 
   return (
     <>
@@ -28,7 +33,7 @@ const Navigation = () => {
         <NavLinks>
           <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
-            <NavLink as="span" onClick={signOutUser}>
+            <NavLink as="span" onClick={signOutHandler}>
               SIGN OUT
             </NavLink>
           ) : (
