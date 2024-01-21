@@ -3,8 +3,8 @@ import { all, call, put, takeLatest } from 'redux-saga/effects';
 import {
   fetchCategoriesFailed,
   fetchCategoriesSuccess,
-} from './categories.action.js';
-import { CATEGORIES_ACTION_TYPES } from './categories.types.js';
+} from './categories.action.ts';
+import { CATEGORIES_ACTION_TYPES } from './categories.types';
 
 import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.util.js';
 

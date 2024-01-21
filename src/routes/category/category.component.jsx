@@ -9,7 +9,7 @@ import { CategoryContainer, CategoryTitle } from './category.styles.jsx';
 import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
-} from '../../store/categories/categories.selector.js';
+} from '../../store/categories/categories.selector.ts';
 
 const Category = () => {
   const { category } = useParams();

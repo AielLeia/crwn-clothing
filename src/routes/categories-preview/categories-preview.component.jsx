@@ -6,7 +6,7 @@ import { Spinner } from '../../components/spinner/spinner.component.jsx';
 import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
-} from '../../store/categories/categories.selector.js';
+} from '../../store/categories/categories.selector.ts';
 
 const CategoriesPreview = () => {
   const categoriesMap = useSelector(selectCategoriesMap);

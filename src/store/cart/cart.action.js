@@ -1,4 +1,4 @@
-import { createAction } from '../../utils/reducer/reducer.util.js';
+import { createAction } from '../../utils/reducer/reducer.util.ts';
 import { CART_ACTION_TYPES } from './cart.types.js';
 
 export const setIsCartOpen = (boolean) =>
