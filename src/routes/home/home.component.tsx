@@ -4,4 +4,4 @@ const Home = () => {
   return <Directory />;
 };
 
-export { Home };
+export default Home;
