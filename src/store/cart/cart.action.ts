@@ -1,32 +1,10 @@
-import {
-  ActionWithPayload,
-  createAction,
-  withMatcher,
-} from '../../utils/reducer/reducer.util';
 import { Product } from '../categories/categories.types';
-import { CART_ACTION_TYPES, CartItem } from './cart.types';
+import { setCartIsOpen, setCartItems } from './cart.reducer';
+import { CartItem } from './cart.types';
 
-type CartToggle = ActionWithPayload<CART_ACTION_TYPES.CART_TOGGLE, boolean>;
+export const setIsCartOpen = setCartIsOpen;
 
-type SetCartItems = ActionWithPayload<
-  CART_ACTION_TYPES.SET_CART_ITEMS,
-  CartItem[]
->;
-
-export const setIsCartOpen = withMatcher(
-  (boolean: boolean): CartToggle =>
-    createAction(CART_ACTION_TYPES.CART_TOGGLE, boolean)
-);
-
-export const setCartItems = withMatcher(
-  (cartItems: CartItem[]): SetCartItems =>
-    createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)
-);
-
-export const addItemToCart = (
-  cartItems: CartItem[],
-  productToAdd: Product
-): SetCartItems => {
+export const addItemToCart = (cartItems: CartItem[], productToAdd: Product) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
   return setCartItems(newCartItems);
 };
@@ -34,7 +12,7 @@ export const addItemToCart = (
 export const removeItemFromCart = (
   cartItems: CartItem[],
   productToRemove: CartItem
-): SetCartItems => {
+) => {
   const newCartItems = removeItemCart(cartItems, productToRemove);
   return setCartItems(newCartItems);
 };
@@ -42,7 +20,7 @@ export const removeItemFromCart = (
 export const clearItemFromCart = (
   cartItems: CartItem[],
   productIdToRemove: number
-): SetCartItems => {
+) => {
   const newCartItems = clearItemCart(cartItems, productIdToRemove);
   return setCartItems(newCartItems);
 };

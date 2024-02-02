@@ -1,11 +1,10 @@
-import { UnknownAction } from 'redux';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { setCartItems, setIsCartOpen } from './cart.action';
 import { CartItem } from './cart.types';
 
 export type CartState = {
-  readonly isCartOpen: boolean;
-  readonly cartItems: CartItem[];
+  isCartOpen: boolean;
+  cartItems: CartItem[];
 };
 
 const CART_INITIAL_STATE: CartState = {
@@ -13,25 +12,19 @@ const CART_INITIAL_STATE: CartState = {
   cartItems: [],
 };
 
-const cartReducer = (
-  state = CART_INITIAL_STATE,
-  action: UnknownAction
-): CartState => {
-  if (setIsCartOpen.match(action)) {
-    return {
-      ...state,
-      isCartOpen: action.payload,
-    };
-  }
+const cartSlice = createSlice({
+  name: 'cart',
+  initialState: CART_INITIAL_STATE,
+  reducers: {
+    setCartIsOpen(state, action: PayloadAction<boolean>) {
+      state.isCartOpen = action.payload;
+    },
+    setCartItems(state, action: PayloadAction<CartItem[]>) {
+      state.cartItems = action.payload;
+    },
+  },
+});
 
-  if (setCartItems.match(action)) {
-    return {
-      ...state,
-      cartItems: action.payload,
-    };
-  }
+export const cartReducer = cartSlice.reducer;
 
-  return state;
-};
-
-export { cartReducer };
+export const { setCartIsOpen, setCartItems } = cartSlice.actions;
