@@ -1,16 +1,11 @@
-import { UnknownAction } from 'redux';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import {
-  fetchCategoriesFailed,
-  fetchCategoriesStart,
-  fetchCategoriesSuccess,
-} from './categories.action';
 import { Category } from './categories.types';
 
 export type CategoryState = {
-  readonly categories: Category[];
-  readonly isLoading: boolean;
-  readonly error: Error | null;
+  categories: Category[];
+  isLoading: boolean;
+  error: Error | null;
 };
 
 const CATEGORIES_INITIAL_STATE: CategoryState = {
@@ -19,21 +14,29 @@ const CATEGORIES_INITIAL_STATE: CategoryState = {
   error: null,
 };
 
-export const categoriesReducer = (
-  state = CATEGORIES_INITIAL_STATE,
-  action: UnknownAction
-): CategoryState => {
-  if (fetchCategoriesStart.match(action)) {
-    return { ...state, isLoading: true };
-  }
+const categoriesSlice = createSlice({
+  name: 'categories',
+  initialState: CATEGORIES_INITIAL_STATE,
+  reducers: {
+    fetchCategoriesStart(state) {
+      state.isLoading = true;
+    },
+    fetchCategoriesSuccess(state, action: PayloadAction<Category[]>) {
+      state.categories = action.payload;
+      state.isLoading = false;
+    },
+    fetchCategoriesFailed(state, action: PayloadAction<Error>) {
+      state.error = action.payload;
+      state.isLoading = false;
+    },
+  },
+});
 
-  if (fetchCategoriesSuccess.match(action)) {
-    return { ...state, categories: action.payload, isLoading: false };
-  }
+export const categoriesReducer = categoriesSlice.reducer;
+export const {
+  fetchCategoriesStart,
+  fetchCategoriesSuccess,
+  fetchCategoriesFailed,
+} = categoriesSlice.actions;
 
-  if (fetchCategoriesFailed.match(action)) {
-    return { ...state, isLoading: false, error: action.payload };
-  }
-
-  return state;
-};
+export const FETCH_CATEGORIES_START = 'categories/fetchCategoriesStart';
