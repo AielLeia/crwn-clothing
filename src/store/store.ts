@@ -1,20 +1,24 @@
-import { Middleware, applyMiddleware, compose, createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { Middleware } from 'redux';
 import logger from 'redux-logger';
 import { PersistConfig, persistReducer, persistStore } from 'redux-persist';
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+} from 'redux-persist/es/constants';
 import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 
 import { rootReducer } from './root-reducer';
+import { USER_ACTION_TYPES } from './user/user.types';
 
 import { rootSaga } from './root-saga';
 
 export type RootState = ReturnType<typeof rootReducer>;
-
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
 
 type ExtendedPersistConfig = PersistConfig<RootState> & {
   whitelist: (keyof RootState)[];
@@ -35,15 +39,26 @@ const middlewares = [
   sagaMiddleware as Middleware,
 ].filter((middleware): middleware is Middleware => Boolean(middleware));
 
-const composeEnhancer =
-  (process.env.NODE_ENV !== 'production' &&
-    window &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
-
-const composeEnhancers = composeEnhancer(applyMiddleware(...middlewares));
-
-export const store = createStore(persistedReducer, undefined, composeEnhancers);
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware({
+      // Customize the built-in serializability dev check
+      serializableCheck: {
+        ignoredActions: [
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER,
+          USER_ACTION_TYPES.SIGN_IN_SUCCESS,
+        ],
+        ignoredPaths: ['user.currentUser.createdAt'],
+      },
+    }).concat(middlewares);
+  },
+});
 
 sagaMiddleware.run(rootSaga);
 
