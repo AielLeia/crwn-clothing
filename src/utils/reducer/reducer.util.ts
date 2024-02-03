@@ -16,7 +16,6 @@ export function withMatcher<
 export function withMatcher(
   actionCreator: (...args: never[]) => UnknownAction & { type: string }
 ) {
-  console.log(actionCreator);
   const type = actionCreator().type;
   return Object.assign(actionCreator, {
     type,

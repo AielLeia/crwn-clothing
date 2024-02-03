@@ -14,7 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 
 import { rootReducer } from './root-reducer';
-import { USER_ACTION_TYPES } from './user/user.types';
+import { SIGN_IN_SUCCESS } from './user/user.reducer';
 
 import { rootSaga } from './root-saga';
 
@@ -43,7 +43,6 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
-      // Customize the built-in serializability dev check
       serializableCheck: {
         ignoredActions: [
           FLUSH,
@@ -52,7 +51,7 @@ export const store = configureStore({
           PERSIST,
           PURGE,
           REGISTER,
-          USER_ACTION_TYPES.SIGN_IN_SUCCESS,
+          SIGN_IN_SUCCESS,
         ],
         ignoredPaths: ['user.currentUser.createdAt'],
       },

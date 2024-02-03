@@ -11,7 +11,7 @@ import {
 } from './navigation.styles';
 
 import { selectIsCartOpen } from '../../store/cart/cart.selector';
-import { signOutStart } from '../../store/user/user.action';
+import { signOutStart } from '../../store/user/user.reducer';
 import { selectCurrentUser } from '../../store/user/user.selector';
 
 import CrwnLogo from '../../assets/crown.svg?react';

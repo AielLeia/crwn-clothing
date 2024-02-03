@@ -6,7 +6,7 @@ import { Button } from '../button/button.component';
 import { FormInput } from '../form-input/form-input.component';
 import { SignUpContainer, SignUpTitle } from './sign-up-form.style';
 
-import { emailSignUpStart } from '../../store/user/user.action';
+import { emailSignUpStart } from '../../store/user/user.reducer';
 
 const defaultFormFields = {
   displayName: '',
@@ -30,7 +30,7 @@ const SignUpForm = () => {
     }
 
     try {
-      dispatch(emailSignUpStart(email, password, displayName));
+      dispatch(emailSignUpStart({ email, password, displayName }));
       resetFormFields();
     } catch (e) {
       if ((e as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {

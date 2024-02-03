@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { Spinner } from './components/spinner/spinner.component';
 
-import { checkUserSession } from './store/user/user.action';
+import { checkUserSession } from './store/user/user.reducer';
 
 const Home = lazy(() => import('./routes/home/home.component'));
 const Authentication = lazy(

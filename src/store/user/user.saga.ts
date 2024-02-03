@@ -2,15 +2,18 @@ import { User } from 'firebase/auth';
 import { all, call, put, takeLatest } from 'typed-redux-saga';
 
 import {
-  EmailSignInStart,
-  EmailSignUpStart,
+  CHECK_USER_SESSION,
+  EMAIL_SIGN_IN_START,
+  EMAIL_SIGN_UP_START,
+  GOOGLE_SIGN_IN_START,
+  SIGN_IN_SUCCESS,
+  SIGN_OUT_START,
   signInFailed,
   signInSuccess,
   signOutFailed,
   signOutSuccess,
   signUpFailed,
-} from './user.action';
-import { USER_ACTION_TYPES } from './user.types';
+} from './user.reducer';
 
 import {
   AdditionalInformation,
@@ -21,6 +24,23 @@ import {
   signInWithGooglePopup,
   signOutUser,
 } from '../../utils/firebase/firebase.util';
+
+type SignInPayload = {
+  type: typeof SIGN_IN_SUCCESS;
+  payload: {
+    email: string;
+    password: string;
+  };
+};
+
+type SignUpPayload = {
+  type: typeof SIGN_IN_SUCCESS;
+  payload: {
+    email: string;
+    password: string;
+    displayName: string;
+  };
+};
 
 function* getSnapshotFromUserAuth(
   userAuth: User,
@@ -54,7 +74,7 @@ function* signInWithGoogle() {
 
 function* signInWithEmailAndPassword({
   payload: { email, password },
-}: EmailSignInStart) {
+}: SignInPayload) {
   try {
     const { user } = yield* call(
       signInAuthUserWithEmailAndPassword,
@@ -70,7 +90,7 @@ function* signInWithEmailAndPassword({
 
 function* signUpWithEmailAndPassword({
   payload: { email, password, displayName },
-}: EmailSignUpStart) {
+}: SignUpPayload) {
   try {
     const { user } = yield* call(
       createAuthUserWithEmailAndPassword,
@@ -105,29 +125,23 @@ function* isUserAuthenticated() {
 }
 
 function* onCheckUserSession() {
-  yield* takeLatest(USER_ACTION_TYPES.CHECK_USER_SESSION, isUserAuthenticated);
+  yield* takeLatest(CHECK_USER_SESSION, isUserAuthenticated);
 }
 
 function* onGoogleSignInStart() {
-  yield* takeLatest(USER_ACTION_TYPES.GOOGLE_SIGN_IN_START, signInWithGoogle);
+  yield* takeLatest(GOOGLE_SIGN_IN_START, signInWithGoogle);
 }
 
 function* onEmailSignInStart() {
-  yield* takeLatest(
-    USER_ACTION_TYPES.EMAIL_SIGN_IN_START,
-    signInWithEmailAndPassword
-  );
+  yield* takeLatest(EMAIL_SIGN_IN_START, signInWithEmailAndPassword);
 }
 
 function* onEmailSignUpStart() {
-  yield* takeLatest(
-    USER_ACTION_TYPES.EMAIL_SIGN_UP_START,
-    signUpWithEmailAndPassword
-  );
+  yield* takeLatest(EMAIL_SIGN_UP_START, signUpWithEmailAndPassword);
 }
 
 function* onSignOutStart() {
-  yield* takeLatest(USER_ACTION_TYPES.SIGN_OUT_START, signOut);
+  yield* takeLatest(SIGN_OUT_START, signOut);
 }
 
 export function* userSaga() {

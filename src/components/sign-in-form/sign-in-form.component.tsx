@@ -12,7 +12,7 @@ import {
 import {
   emailSignInStart,
   googleSignInStart,
-} from '../../store/user/user.action';
+} from '../../store/user/user.reducer';
 import { BUTTON_TYPE_CLASSES } from '../button/button.types';
 
 const defaultFormFields = {
@@ -30,7 +30,7 @@ const SignInForm = () => {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      dispatch(emailSignInStart(email, password));
+      dispatch(emailSignInStart({ email, password }));
       resetFormFields();
     } catch (e) {
       console.log('user sign in error', e);
