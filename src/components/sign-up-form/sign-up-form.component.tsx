@@ -2,11 +2,11 @@ import { AuthError, AuthErrorCodes } from 'firebase/auth';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Button } from '../button/button.component';
-import { FormInput } from '../form-input/form-input.component';
 import { SignUpContainer, SignUpTitle } from './sign-up-form.style';
+import { Button } from '@/components/button/button.component';
+import { FormInput } from '@/components/form-input/form-input.component';
 
-import { emailSignUpStart } from '../../store/user/user.reducer';
+import { emailSignUpStart } from '@/store/user/user.reducer';
 
 const defaultFormFields = {
   displayName: '',

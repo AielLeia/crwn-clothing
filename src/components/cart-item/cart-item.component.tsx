@@ -8,7 +8,7 @@ import {
   CartItemImg,
 } from './cart-item.styles';
 
-import { CartItem } from '../../store/cart/cart.types';
+import { CartItem } from '@/store/cart/cart.types';
 
 type CartItemProps = {
   cartItem: CartItem;

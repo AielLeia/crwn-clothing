@@ -17,9 +17,9 @@ import {
   addItemToCart,
   clearItemFromCart,
   removeItemFromCart,
-} from '../../store/cart/cart.action';
-import { selectCartItems } from '../../store/cart/cart.selector';
-import { CartItem } from '../../store/cart/cart.types';
+} from '@/store/cart/cart.action';
+import { selectCartItems } from '@/store/cart/cart.selector';
+import { CartItem } from '@/store/cart/cart.types';
 
 type CheckoutItemProps = {
   cartItem: CartItem;

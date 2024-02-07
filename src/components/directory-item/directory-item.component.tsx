@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Category } from '../directory/directory.component';
 import {
   DirectoryItemBackgroundImage,
   DirectoryItemBody,
@@ -9,6 +8,7 @@ import {
   DirectoryItemBodyTitle,
   DirectoryItemContainer,
 } from './directory-item.style';
+import { Category } from '@/components/directory/directory.component';
 
 type CategoryItemProps = {
   category: Category;

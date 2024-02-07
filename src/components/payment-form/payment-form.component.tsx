@@ -7,10 +7,10 @@ import {
   PaymentButton,
   PaymentFormContainer,
 } from './payment-form.styles';
+import { BUTTON_TYPE_CLASSES } from '@/components/button/button.types';
 
-import { selectCartTotal } from '../../store/cart/cart.selector';
-import { selectCurrentUser } from '../../store/user/user.selector';
-import { BUTTON_TYPE_CLASSES } from '../button/button.types';
+import { selectCartTotal } from '@/store/cart/cart.selector';
+import { selectCurrentUser } from '@/store/user/user.selector';
 
 const PaymentForm = () => {
   const [isProcessingPayment, setIsProcessingPayment] = useState(false);

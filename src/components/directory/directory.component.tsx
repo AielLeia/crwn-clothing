@@ -1,5 +1,5 @@
-import { CategoryItem } from '../directory-item/directory-item.component';
 import { DirectoryContainer } from './directory.styles';
+import { CategoryItem } from '@/components/directory-item/directory-item.component';
 
 export type Category = {
   id: number;

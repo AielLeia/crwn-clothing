@@ -8,7 +8,7 @@ export type CategoryState = {
   error: Error | null;
 };
 
-const CATEGORIES_INITIAL_STATE: CategoryState = {
+export const CATEGORIES_INITIAL_STATE: CategoryState = {
   categories: [],
   isLoading: false,
   error: null,

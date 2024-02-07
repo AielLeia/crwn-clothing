@@ -16,7 +16,16 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client"],
+    "types": ["vite/client", "vitest/globals"],
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"],
+      "@/assets/*": ["assets/*"],
+      "@/components/*": ["components/*"],
+      "@/routes/*": ["routes/*"],
+      "@/stores/*": ["stores/*"],
+      "@/utils/*": ["utils/*"],
+    },
   },
   "include": ["src", "src/custom.d.ts"],
 }

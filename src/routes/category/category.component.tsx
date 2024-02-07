@@ -2,14 +2,14 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { ProductCard } from '../../components/product-card/product-card.component';
-import { Spinner } from '../../components/spinner/spinner.component';
 import { CategoryContainer, CategoryTitle } from './category.styles';
+import { ProductCard } from '@/components/product-card/product-card.component';
+import { Spinner } from '@/components/spinner/spinner.component';
 
 import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
-} from '../../store/categories/categories.selector';
+} from '@/store/categories/categories.selector';
 
 type CategoryRouteParams = {
   category: string;

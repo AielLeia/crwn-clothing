@@ -1,19 +1,16 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Button } from '../button/button.component';
-import { FormInput } from '../form-input/form-input.component';
 import {
   SignInButtonContainer,
   SignInContainer,
   SignInTitle,
 } from './sign-in-form.style';
+import { Button } from '@/components/button/button.component';
+import { BUTTON_TYPE_CLASSES } from '@/components/button/button.types';
+import { FormInput } from '@/components/form-input/form-input.component';
 
-import {
-  emailSignInStart,
-  googleSignInStart,
-} from '../../store/user/user.reducer';
-import { BUTTON_TYPE_CLASSES } from '../button/button.types';
+import { emailSignInStart, googleSignInStart } from '@/store/user/user.reducer';
 
 const defaultFormFields = {
   email: '',

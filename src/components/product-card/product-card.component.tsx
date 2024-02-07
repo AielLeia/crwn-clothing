@@ -10,11 +10,11 @@ import {
   ProductCardFooterPrice,
   ProductCardImage,
 } from './product-card.style';
+import { BUTTON_TYPE_CLASSES } from '@/components/button/button.types';
 
-import { addItemToCart } from '../../store/cart/cart.action';
-import { selectCartItems } from '../../store/cart/cart.selector';
-import { Product } from '../../store/categories/categories.types';
-import { BUTTON_TYPE_CLASSES } from '../button/button.types';
+import { addItemToCart } from '@/store/cart/cart.action';
+import { selectCartItems } from '@/store/cart/cart.selector';
+import { Product } from '@/store/categories/categories.types';
 
 type ProductCartProps = {
   product: Product;
@@ -41,7 +41,7 @@ const ProductCard: FC<ProductCartProps> = ({ product }) => {
         onClick={addProductToCart}
         buttonType={BUTTON_TYPE_CLASSES.inverted}
       >
-        Add to card
+        Add to cart
       </ProductCardButton>
     </ProductCardContainer>
   );

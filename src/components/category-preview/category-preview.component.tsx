@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import { ProductCard } from '../product-card/product-card.component';
 import './category-preview.styles';
 import {
   CategoryPreviewContainer,
   CategoryPreviewTitle,
   CategoryPreview as StyledCategoryPreview,
 } from './category-preview.styles';
+import { ProductCard } from '@/components/product-card/product-card.component';
 
-import { Product } from '../../store/categories/categories.types';
+import { Product } from '@/store/categories/categories.types';
 
 type CategoryPreviewProps = {
   title: string;
